@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <title>Vue App</title>
+  <body>
+    <h1>Building a slightly more sophisticated HTML-based Vue app with additional directives</h1>
+    <div id="app">
+      <!-- toggleable text -->
+      <p v-if="toggle">Hello, {{greeting}}</p>
+      <p v-else>Goodbye, {{farewell}}</p>
+      <!-- show all names -->
+      <h3>All Names</h3>
+      <ul>
+        <li v-for="name in names">{{name}}</li>
+      </ul>
+      <!-- 3 letter names -->
+      <h3>3 Letter Names</h3>
+      <ul>
+        <li v-for="name in threeLetterNames">{{name}}</li>
+      </ul>
+      <!-- non 3 letter names -->
+      <h3>Non 3 Letter Names</h3>
+      <ul>
+        <li v-for="name in nonThreeLetterNames(names)">{{name}}</li>
+      </ul>
+      <!-- toggle button -->
+      <button @click="toggle = !toggle">Toggle Me</button>
+    </div>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script>
+      let app = Vue.createApp({
+        data () {
+          return { 
+            greeting: "I'm Vue!",
+            farewell: "Have a nice day!",
+            names: ['Joe', 'Sue', 'Carol'],
+            toggle: true
+          }
+        },
+        // computed property to return altered data
+        computed: {
+          threeLetterNames() {
+            return this.names.filter(n => n.length === 3);
+          }
+        },
+        // methods
+        methods: {
+          // return all names that aren't 3 letters long
+          nonThreeLetterNames(names) {
+            return names.filter(n => n.length !== 3);
+          }
+        }
+      }).mount('#app')
+      </script>
+  </body>
+</html>

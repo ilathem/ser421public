@@ -112,7 +112,9 @@ export default {
       span, option, input {
             font-size:25px;
       }
-</style><script>
+</style>
+
+<script>
 export default {
    el: '#databinding',
    data: {
